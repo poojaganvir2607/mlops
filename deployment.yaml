@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-anomaly-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ml-anomaly
+  template:
+    metadata:
+      labels:
+        app: ml-anomaly
+    spec:
+      containers:
+      - name: ml-anomaly
+        image: 747409585857.dkr.ecr.us-east-1.amazonaws.com/mlops:2.0  
+        command: ["python", "anomaly_project/anomaly.py"]
+      imagePullSecrets:
+      - name: ecr-secret1
+
